@@ -377,5 +377,5 @@ void init_entries(struct entry **entries) {
 
     *entries = (struct entry *)malloc(sizeof(struct entry) * ENTRIESCHUNK);
     for (i = 0; i < ENTRIESCHUNK; i++)
-        (*entries[i]).text = (unsigned char *)malloc(ENTRYTEXTCHUNK + 1);
+        (*entries)[i].text = (unsigned char *)malloc(ENTRYTEXTCHUNK + 1);
 }
