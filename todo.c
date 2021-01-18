@@ -21,7 +21,7 @@ void add_entry(struct entry **entries, unsigned char *text, int *n, int *entries
 void remove_entry(struct entry *entries, int idx, int *n);
 void display_entries(struct entry *entries, int n);
 void spaced_display(struct entry *entries, int n);
-void init_entries(struct entry *entries);
+void init_entries(struct entry **entries);
 
 struct entry {
     char done;
@@ -33,7 +33,7 @@ int main() {
     struct entry *entries;
     int n, entries_m;
 
-    init_entries(entries);
+    init_entries(&entries);
 
     save_fp = fopen(SAVE_FN, "rb");
 
@@ -372,10 +372,10 @@ void spaced_display(struct entry *entries, int n) {
     printf("\n");
 }
 
-void init_entries(struct entry *entries) {
+void init_entries(struct entry **entries) {
     int i;
 
-    entries = (struct entry *)malloc(sizeof(struct entry) * ENTRIESCHUNK);
+    *entries = (struct entry *)malloc(sizeof(struct entry) * ENTRIESCHUNK);
     for (i = 0; i < ENTRIESCHUNK; i++)
-        entries[i].text = (unsigned char *)malloc(ENTRYTEXTCHUNK + 1);
+        (*entries[i]).text = (unsigned char *)malloc(ENTRYTEXTCHUNK + 1);
 }
